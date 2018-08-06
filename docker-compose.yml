@@ -1,0 +1,36 @@
+version: '3'
+services:
+  config:
+    build: config
+    ports:
+      - 5555:5555
+
+  registry:
+    build: registry
+    ports:
+      - 8761:8761
+
+  gateway:
+    build: gateway
+    ports:
+          - 4000:4000
+
+#  auth-service:
+#    build: auth-service
+#    ports:
+#      - 5000:5000
+
+  file-service:
+    build: file-service
+    ports:
+      - 6000:6000
+
+  file-list-service:
+    build: file-list-service
+    ports:
+      - 9000:9000
+
+  type-size-info-service:
+    build: type-size-info-service
+    ports:
+      - 8000:8000

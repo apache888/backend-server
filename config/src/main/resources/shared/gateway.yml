@@ -1,0 +1,43 @@
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
+  routes:
+#    auth-service:
+#        path: /uaa/**
+#        url: http://auth-service:5000
+#        stripPrefix: false
+#        sensitiveHeaders:
+
+    file-service:
+        path: /files/**
+        url: http://localhost:6000
+        serviceId: file-service
+        stripPrefix: false
+        sensitiveHeaders:
+
+    file-list-service:
+        path: /file-list/**
+        url: http://localhost:9000
+        serviceId: file-list-service
+        stripPrefix: false
+        sensitiveHeaders:
+
+    type-size-info-service:
+        path: /type-size-info/**
+        url: http://localhost:8000
+        serviceId: type-size-info-service
+        stripPrefix: false
+        sensitiveHeaders:
+
+#    client-front:
+#          path: /**
+#          url: http://localhost:10000
+#          stripPrefix: false
+#          sensitiveHeaders:
+
+
+server:
+  port: 4000
