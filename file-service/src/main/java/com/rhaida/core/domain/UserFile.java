@@ -16,8 +16,9 @@ import java.util.UUID;
  */
 @Table
 @Builder
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserFile {
 
     @PrimaryKey(value = "id")
