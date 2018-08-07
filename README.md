@@ -1,6 +1,7 @@
 # backend-server
 
 docker run in development
+
 run serveces manualy in order: config-registry-gateway-others
 
 run cassandra server
