@@ -4,10 +4,7 @@ import com.datastax.driver.core.DataType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
-import org.springframework.data.cassandra.core.mapping.CassandraType;
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
-import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.data.cassandra.core.mapping.*;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -18,18 +15,15 @@ import java.util.UUID;
  * @author Roman Hayda
  */
 @Table
-@Getter
-@Setter
-@EqualsAndHashCode
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class UserFile {
 
-    @PrimaryKeyColumn(name = "id", ordinal = 0)
+    @PrimaryKey(value = "id")
     private UUID id;
 
-    @PrimaryKeyColumn(name = "fileName", ordinal = 1, type = PrimaryKeyType.PARTITIONED)
+    @Column(value = "file_name")
     private String fileName;
 
     @Column
@@ -43,6 +37,6 @@ public class UserFile {
     @Column
     private Long size;
 
-    @Column
+    @Column("upload_time")
     private Instant uploadTime;
 }

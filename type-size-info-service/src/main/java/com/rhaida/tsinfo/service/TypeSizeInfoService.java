@@ -12,6 +12,6 @@ import java.util.Map;
  */
 public interface TypeSizeInfoService {
 
-    public Map<String, Long> getTypeSizeInfo(List<UserFile> list);
+    Map<String, String> getTypeSizeInfo(List<UserFile> list);
 
 }

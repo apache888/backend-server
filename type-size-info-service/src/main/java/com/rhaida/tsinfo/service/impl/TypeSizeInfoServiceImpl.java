@@ -18,19 +18,33 @@ import java.util.Map;
 public class TypeSizeInfoServiceImpl implements TypeSizeInfoService {
 
     @Override
-    public Map<String, Long> getTypeSizeInfo(List<UserFile> list) {
-        Map<String, Long> typeSizeInfo = new HashMap<>();
-        typeSizeInfo.put("unknown", 0L);
-        for (String extension: Utils.extensions) {
-            Long size = 0L;
-            typeSizeInfo.put(extension, size);
-            for (UserFile userFile : list) {
-                if (userFile.getExtension().equalsIgnoreCase(extension)) {
-                    typeSizeInfo.put(extension, typeSizeInfo.get(extension) + userFile.getSize());
+    public Map<String, String> getTypeSizeInfo(List<UserFile> list) {
+        Map<String, Long> typeSizes = new HashMap<>();
+        Map<String, String> typeSizeInfo = new HashMap<>();
+        typeSizes.put("unknown", 0L);
+        for (UserFile userFile : list) {
+            String extension = userFile.getExtension();
+            if (Utils.extensions.contains(extension)) {
+                if (typeSizes.get(extension) == null) {
+                    typeSizes.put(extension, userFile.getSize());
+                }else {
+                    typeSizes.put(extension, typeSizes.get(extension) + userFile.getSize());
                 }
-                typeSizeInfo.put("unknown", typeSizeInfo.get(extension) + userFile.getSize());
+            }else {
+                typeSizes.put("unknown", typeSizes.get("unknown") + userFile.getSize());
             }
-            typeSizeInfo.put(extension, typeSizeInfo.get(extension)/1_000_000);
+        }
+        for (Map.Entry<String, Long> entry : typeSizes.entrySet()) {
+
+            Long size = entry.getValue();
+            if (size < 1000) {
+                typeSizeInfo.put(entry.getKey(), size + "Byte");
+            } else
+            if (size < 1000000) {
+                typeSizeInfo.put(entry.getKey(), size / 1000f + "KB");
+            } else{
+                typeSizeInfo.put(entry.getKey(), size / 1000000f + "MB");
+            }
         }
         return typeSizeInfo;
     }

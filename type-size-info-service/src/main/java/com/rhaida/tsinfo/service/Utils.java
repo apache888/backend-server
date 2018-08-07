@@ -11,5 +11,5 @@ import java.util.Set;
  */
 public class Utils {
     public static final Set<String> extensions = new HashSet<>(
-            Arrays.asList("jpg", "gif", "img", "bmp", "txt", "doc", "rtf", "xml", "xls", "csv"));
+            Arrays.asList("jpg", "jpeg", "gif", "img", "bmp", "txt", "doc", "docx", "rtf", "xml", "xls", "xlsx", "csv"));
 }

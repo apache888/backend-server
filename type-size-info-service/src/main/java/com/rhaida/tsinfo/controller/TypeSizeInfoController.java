@@ -26,9 +26,9 @@ public class TypeSizeInfoController {
     private TypeSizeInfoService service;
 
     @GetMapping(path = "")
-    public Map<String, Long> getTypeSizeInfo() {
+    public Map<String, String> getTypeSizeInfo() {
         List<UserFile> allFiles = fileServiceClient.getAllFiles();
-        Map<String, Long> typeSizeInfo = service.getTypeSizeInfo(allFiles);
+        Map<String, String> typeSizeInfo = service.getTypeSizeInfo(allFiles);
         return typeSizeInfo;
     }
 }

@@ -34,7 +34,7 @@ public class UserFileController {
         UserFile userFile = UserFile.builder()
                 .id(UUID.randomUUID())
                 .fileName(multipartFile.getOriginalFilename())
-                .extension(multipartFile.getContentType())
+                .extension(multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf(".")+1))
                 .content(multipartFile.getBytes())
                 .size(multipartFile.getSize())
                 .uploadTime(Instant.now())
@@ -55,17 +55,10 @@ public class UserFileController {
         return ResponseEntity.ok(userFiles);
     }
 
-    @PatchMapping(path = "/{id}/rename")
+    @PatchMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity rename(@RequestBody Map<String, String> changes, @PathVariable UUID id) {
-        String newName = changes.get("fileName");
-        if (StringUtils.isEmpty(newName)) {
-            return ResponseEntity.badRequest().build();
-        }
-        Optional<UserFile> oUserFile = service.rename(id, newName);
-        if (oUserFile.isPresent()) {
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.badRequest().build();
+        Optional<UserFile> oUserFile = service.rename(id, changes);
+        return oUserFile.<ResponseEntity>map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
     @DeleteMapping(path = "/{id}")

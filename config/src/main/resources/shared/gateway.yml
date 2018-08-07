@@ -5,12 +5,6 @@ zuul:
     socket-timeout-millis: 20000
 
   routes:
-#    auth-service:
-#        path: /uaa/**
-#        url: http://auth-service:5000
-#        stripPrefix: false
-#        sensitiveHeaders:
-
     file-service:
         path: /files/**
         url: http://localhost:6000
@@ -31,13 +25,6 @@ zuul:
         serviceId: type-size-info-service
         stripPrefix: false
         sensitiveHeaders:
-
-#    client-front:
-#          path: /**
-#          url: http://localhost:10000
-#          stripPrefix: false
-#          sensitiveHeaders:
-
 
 server:
   port: 4000

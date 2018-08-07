@@ -6,10 +6,9 @@ import com.rhaida.core.service.UserFileService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created on 04.08.2018
@@ -28,12 +27,16 @@ public class UserFileServiceImpl implements UserFileService {
     }
 
     @Override
-    public Optional<UserFile> rename(UUID id, String newName) {
+    public Optional<UserFile> rename(UUID id, Map<String, String> changes) {
+        String newName = changes.get("fileName");
+        if (StringUtils.isEmpty(newName)) {
+            return Optional.empty();
+        }
+
         Optional<UserFile> stored = fileRepository.findById(id);
         if (stored.isPresent()) {
             UserFile file = stored.get();
-            file.setFileName(newName);
-            fileRepository.save(file);
+            file.setFileName(newName + "." + file.getExtension());
             return Optional.of(fileRepository.save(file));
         }
         return Optional.empty();
