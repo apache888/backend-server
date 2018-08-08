@@ -28,7 +28,7 @@ public class UserFileServiceImpl implements UserFileService {
 
     @Override
     public Optional<UserFile> rename(UUID id, Map<String, String> changes) {
-        String newName = changes.get("fileName");
+        String newName = changes.get("filename");
         if (StringUtils.isEmpty(newName)) {
             return Optional.empty();
         }
@@ -36,7 +36,7 @@ public class UserFileServiceImpl implements UserFileService {
         Optional<UserFile> stored = fileRepository.findById(id);
         if (stored.isPresent()) {
             UserFile file = stored.get();
-            file.setFileName(newName + "." + file.getExtension());
+            file.setFileName(newName);
             return Optional.of(fileRepository.save(file));
         }
         return Optional.empty();

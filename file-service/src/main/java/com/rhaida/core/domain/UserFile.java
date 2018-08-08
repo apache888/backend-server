@@ -2,6 +2,7 @@ package com.rhaida.core.domain;
 
 import com.datastax.driver.core.DataType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.*;
@@ -25,6 +26,7 @@ public class UserFile {
     private UUID id;
 
     @Column(value = "file_name")
+    @JsonProperty("filename")
     private String fileName;
 
     @Column

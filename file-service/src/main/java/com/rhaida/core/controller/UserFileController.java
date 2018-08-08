@@ -33,7 +33,7 @@ public class UserFileController {
     public ResponseEntity saveFile(@RequestParam("file") MultipartFile multipartFile) throws IOException {
         UserFile userFile = UserFile.builder()
                 .id(UUID.randomUUID())
-                .fileName(multipartFile.getOriginalFilename())
+                .fileName(multipartFile.getOriginalFilename().substring(0, multipartFile.getOriginalFilename().lastIndexOf(".")))
                 .extension(multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf(".")+1))
                 .content(multipartFile.getBytes())
                 .size(multipartFile.getSize())
@@ -49,10 +49,15 @@ public class UserFileController {
         return oUserFile.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
+//    @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//    public ResponseEntity getAll() {
+//        List<UserFile> userFiles = service.getAll();
+//        return ResponseEntity.ok(userFiles);
+//    }
+
     @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity getAll() {
-        List<UserFile> userFiles = service.getAll();
-        return ResponseEntity.ok(userFiles);
+    public List<UserFile> getAll() {
+        return service.getAll();
     }
 
     @PatchMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)

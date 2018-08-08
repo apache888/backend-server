@@ -14,7 +14,7 @@ import java.util.UUID;
 public class UserFile {
     private UUID id;
 
-    private String fileName;
+    private String filename;
 
     private String extension;
 
