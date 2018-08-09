@@ -44,7 +44,6 @@ public class TypeSizeInfoServiceImpl implements TypeSizeInfoService {
             } else if (size < 1000000) {
                 dto.setType(entry.getKey());
                 dto.setSize(String.format("%.2fKB", size / 1000f));
-                dto.setSize(size / 1000f + "KB");
                 typeSizeInfo.add(dto);
             } else {
                 dto.setType(entry.getKey());
