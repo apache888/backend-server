@@ -2,6 +2,7 @@ package com.rhaida.flist.controller;
 
 import com.rhaida.flist.client.FileServerClient;
 import com.rhaida.flist.dto.UserFile;
+import com.rhaida.flist.service.FileListService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,11 +22,11 @@ import java.util.List;
 @AllArgsConstructor(onConstructor = @__({@Autowired}))
 public class FileListController {
 
-    private FileServerClient fileServiceClient;
+    private FileListService fileListService;
 
     @GetMapping(path = "")
     public List<UserFile> getList() {
-        List<UserFile> allFiles = fileServiceClient.getAllFiles();
+        List<UserFile> allFiles = fileListService.getAllFiles();
         return allFiles;
     }
 }

@@ -1,3 +1,10 @@
-
+spring:
+  servlet:
+    multipart:
+      location: /src/temp
+      max-file-size: -1
+      maxr-equest-size: -1
 server:
   port: 6000
+  tomcat:
+      basedir: ${user.home}/tmp/tomcat

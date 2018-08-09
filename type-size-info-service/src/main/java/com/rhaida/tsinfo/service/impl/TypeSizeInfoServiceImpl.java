@@ -6,10 +6,7 @@ import com.rhaida.tsinfo.service.TypeSizeInfoService;
 import com.rhaida.tsinfo.service.Utils;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created on 05.08.2018
@@ -53,6 +50,7 @@ public class TypeSizeInfoServiceImpl implements TypeSizeInfoService {
                 dto.setSize(size / 1000000f + "MB");
             }
         }
+        typeSizeInfo.sort(Comparator.comparing(TypeSizeInfoDto::getType));
         return typeSizeInfo;
     }
 }

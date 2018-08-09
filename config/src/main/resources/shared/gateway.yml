@@ -28,3 +28,12 @@ zuul:
 
 server:
   port: 4000
+  tomcat:
+      basedir: ${user.home}/tmp/tomcat
+
+spring:
+  servlet:
+    multipart:
+      location: /src/temp
+      max-file-size: -1
+      maxr-equest-size: -1
