@@ -43,11 +43,13 @@ public class TypeSizeInfoServiceImpl implements TypeSizeInfoService {
                 typeSizeInfo.add(dto);
             } else if (size < 1000000) {
                 dto.setType(entry.getKey());
+                dto.setSize(String.format("%.2fKB", size / 1000f));
                 dto.setSize(size / 1000f + "KB");
                 typeSizeInfo.add(dto);
             } else {
                 dto.setType(entry.getKey());
-                dto.setSize(size / 1000000f + "MB");
+                dto.setSize(String.format("%.2fMB", size / 1000000f));
+                typeSizeInfo.add(dto);
             }
         }
         typeSizeInfo.sort(Comparator.comparing(TypeSizeInfoDto::getType));
