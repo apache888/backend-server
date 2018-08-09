@@ -1,9 +1,9 @@
 package com.rhaida.tsinfo.service;
 
+import com.rhaida.tsinfo.dto.TypeSizeInfoDto;
 import com.rhaida.tsinfo.dto.UserFile;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created on 05.08.2018
@@ -12,6 +12,6 @@ import java.util.Map;
  */
 public interface TypeSizeInfoService {
 
-    Map<String, String> getTypeSizeInfo(List<UserFile> list);
+    List<TypeSizeInfoDto> getTypeSizeInfo(List<UserFile> list);
 
 }

@@ -1,17 +1,16 @@
 package com.rhaida.tsinfo.controller;
 
 import com.rhaida.tsinfo.client.FileServiceClient;
+import com.rhaida.tsinfo.dto.TypeSizeInfoDto;
 import com.rhaida.tsinfo.dto.UserFile;
 import com.rhaida.tsinfo.service.TypeSizeInfoService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created on 05.08.2018
@@ -27,9 +26,9 @@ public class TypeSizeInfoController {
     private TypeSizeInfoService service;
 
     @GetMapping(path = "")
-    public Map<String, String> getTypeSizeInfo() {
+    public List<TypeSizeInfoDto> getTypeSizeInfo() {
         List<UserFile> allFiles = fileServiceClient.getAllFiles();
-        Map<String, String> typeSizeInfo = service.getTypeSizeInfo(allFiles);
+        List<TypeSizeInfoDto> typeSizeInfo = service.getTypeSizeInfo(allFiles);
         return typeSizeInfo;
     }
 }

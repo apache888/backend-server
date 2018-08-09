@@ -1,6 +1,7 @@
 package com.rhaida.core.service.impl;
 
 import com.rhaida.core.domain.UserFile;
+import com.rhaida.core.dto.RenameDto;
 import com.rhaida.core.repository.UserFileRepository;
 import com.rhaida.core.service.UserFileService;
 import lombok.AllArgsConstructor;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Created on 04.08.2018
@@ -27,8 +30,8 @@ public class UserFileServiceImpl implements UserFileService {
     }
 
     @Override
-    public Optional<UserFile> rename(UUID id, Map<String, String> changes) {
-        String newName = changes.get("filename");
+    public Optional<UserFile> rename(UUID id, RenameDto renameDto) {
+        String newName = renameDto.getFilename();
         if (StringUtils.isEmpty(newName)) {
             return Optional.empty();
         }
